@@ -1,0 +1,87 @@
+---
+title: "Boxplot MD"
+author: "Selene Muñoz"
+date: "2/10/2021"
+output: html_document
+---
+
+Instalar paqueterías 
+
+#install.packages("gapminder")
+
+#install.packages("ggplot2")
+
+
+Cargar librería ggplot2 y gapminder
+```{r}
+library(ggplot2)
+library(gapminder)
+```
+
+Cargar datos a entorno
+```{r}
+data("gapminder")
+```
+
+Filtrar por año 2007
+```{r}
+gapminder2007 <- gapminder[gapminder$year == '2007', ]
+```
+
+Boxplot en ggplot2
+```{r}
+ggplot(data = gapminder2007,
+       mapping = aes(y=lifeExp))+
+  geom_boxplot()
+```
+
+Boxplot varias variables ggplot2
+```{r}
+ggplot(data = gapminder2007,
+       mapping = aes(x=continent,
+                     y=lifeExp))+
+  geom_boxplot()
+```
+
+Marcando datos atipicos
+```{r}
+ggplot(data = gapminder2007,
+       mapping = aes(x=continent,
+                     y=lifeExp))+
+  geom_boxplot(outlier.colour = "red",
+               outlier.shape = 8,
+               outlier.size = 4)
+```
+
+Marcando datos atipicos (vertical)
+```{r}
+ggplot(data = gapminder2007,
+       mapping = aes(x=continent,
+                     y=lifeExp))+
+  geom_boxplot(outlier.colour = "red",
+               outlier.shape = 8,
+               outlier.size = 4)+
+  coord_flip()
+```
+
+Marcando datos atipicos y observaciones
+```{r}
+ggplot(data = gapminder2007,
+       mapping = aes(x= continent,
+                     y=lifeExp))+
+  geom_boxplot()+
+  geom_jitter(shape = 16,
+              position = position_jitter(0.2))
+```
+
+Cambiando color de cajas
+```{r}
+ggplot(data = gapminder2007,
+       mapping = aes(x= continent,
+                     y=lifeExp,
+                     fill=continent))+
+  geom_boxplot()
+
+```
+
+Tenemos un gráfico óptimo
